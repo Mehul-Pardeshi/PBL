@@ -1,0 +1,211 @@
+
+import random
+import time
+
+
+# Character class definition
+class Character:
+    def __init__(self, name, role, backstory):
+        self.name = name
+        self.role = role
+        self.backstory = backstory
+
+
+# Task class definition
+class Task:
+    def __init__(self, description, clue):
+        self.description = description
+        self.clue = clue
+
+
+# Function to randomly select the imposter
+def select_imposter(characters):
+    return random.choice(characters)
+
+
+# Function to choose the player's character
+def choose_character(characters):
+    print("Choose your character:")
+    for i, character in enumerate(characters):
+        print(f"{i + 1}. {character.name} - {character.role}")
+    while True:
+        choice = input("Enter the number corresponding to your choice: ")
+        if choice.isdigit() and 1 <= int(choice) <= len(characters):
+            selected_character = characters[int(choice) - 1]
+            if selected_character.name == "Ananya":
+                print("You choose Ananya, who is the imposter. Game over!")
+                return None
+            else:
+                return selected_character
+        else:
+            print("Invalid choice. Please try again.")
+
+
+# Function to reveal character backstories
+def reveal_backstories(characters):
+    print("Character Backstories:")
+    for character in characters:
+        print(f"{character.name}: {character.backstory}")
+        time.sleep(2)
+
+
+# Function to perform a task with multiple choices
+def perform_task(task, imposter):
+    print("\nTask Description:")
+    print(task.description)
+    time.sleep(2)
+    print("\nCompleting the task...")
+    time.sleep(3)
+
+    if imposter.role == "Taskmaster":
+        print("\nYou found a clue!")
+        print(f"Clue: {task.clue}")
+    else:
+        # Add multiple choices for the task outcome
+        if task.description == "Decipher the strange symbol on the wall...wait!..Niharika's bracelet has a similar symbol on it":
+            choice = input("\nYou come across a set of symbols. How do you decipher them?\n"
+                           "1. Use your skills to analyze the patterns.\n"
+                           "2. Compare the symbols.\n"
+                           "3. Consult the others for insights based on symbolism.\n"
+                           "Enter your choice (1-3): ")
+
+            if choice == "1":
+                print("\nYour skills come in handy. You decipher the symbols correctly.")
+                print("The clue reveals that the imposter is very active on social media")
+
+            elif choice == "2":
+                print("You did not find any clue :( ")
+
+            elif choice == "3":
+                print("You did not find any clue :( ")
+
+
+        elif task.description == "You found a piece of paper in Ananya's pocket saying something!...Solve the riddle.":
+            choice = input("\nYou encounter a riddle. How do you approach solving it?\n"
+                           "1. Utilize your skills to search for clues.\n"
+                           "2. Discuss and brainstorm with the other characters for collective insights.\n"
+                           "3. Use your abilities to observe others' reactions and gather information.\n"
+                           "Enter your choice (1-3): ")
+
+            if choice == "1":
+                print("You did not find any clue :( ")
+
+            elif choice == "2":
+                print("You did not find any clue :( ")
+
+            elif choice == "3":
+                print("\nYour instincts kick in as you observe others closely.")
+                print("You notice someone other than you is also being very careful about their surroundings... "
+                      "*guess* it's Aditya, Ananya, and Aarohi")
+
+        elif task.description == "You find out Rohan and Ananya are hiding something...it's a key!!":
+            choice = input("\nYou all snatch the key from them and try to find a lock. How do you proceed?\n"
+                           "1. Use your skills to analyze the room layout for potential lock placing positions.\n"
+                           "2. Request assistance from Niharika to search strategically based on her knowledge.\n"
+                           "3. Trust what Ananya is saying about where the lock might be.\n"
+                           "Enter your choice(1-3): ")
+
+            if choice == "1":
+                print("You did not find any clue :( ")
+
+            elif choice == "2":
+                print("You did not find any clue :( ")
+
+            elif choice == "3":
+                print("\nAnanya was telling the truth")
+                print("The clue hints that the imposter uses the right side of the brain more often")
+
+        elif task.description == "Reconstruct the torn diary pages found.":
+            choice = input("\nYou have torn diary pages that need to be reconstructed. How do you approach it?\n"
+                           "1. Use Aarohi's skills to analyze the torn edges and reconstruct the pages.\n"
+                           "2. Seek assistance from Rohan to piece together related fragments.\n"
+                           "3. Apply your own techniques to gather clues from hidden markings or ink patterns.\n"
+                           "Enter your choice (1-3): ")
+
+            if choice == "1":
+                print("You did not find any clue :( ")
+
+            elif choice == "2":
+                print("\nWith Rohan's assistance, you identify a clue from the diary pages.")
+                print("The imposter is a two-faced person... ALL THAT GLITTERS IS NOT GOLD!!!")
+
+            elif choice == "3":
+                print("You did not find any clue :( ")
+
+        elif task.description == "Aditya mysteriously finds a wireless code breaker lying around in the room...":
+            choice = input("\nYou encounter a wireless code breaker. How do you attempt to crack it?\n"
+                           "1. Put your trust in Ananya and let her crack the code\n"
+                           "2. Collaborate with others to combine their knowledge and deduce the code.\n"
+                           "3. Utilize your hacking skills to bypass the code electronically.\n"
+                           "Enter your choice (1-3): ")
+
+            if choice == "1":
+                print("\nThe code is broken!!")
+                print("The imposter's name starts with the letter 'A'")
+
+            elif choice == "2":
+                print("You did not find any clue :( ")
+
+            elif choice == "3":
+                print("You did not find any clue :( ")
+
+
+# Main game code
+def play_game():
+    # Character and task initialization
+    characters = [
+        Character("Aarohi", "Doctor", "Aarohi is a skilled doctor with a deep knowledge of medicine."),
+        Character("Niharika", "Data Analyst", "Niharika is an expert at creating and overseeing DSA related subjects."),
+        Character("Aditya", "Engineer", "Aditya is a talented engineer who excels at problem-solving."),
+        Character("Rohan", "Writer", "Rohan is a renowned writer known for his clever storytelling."),
+        Character("Ananya", "Artist", "Ananya is an exceptional artist with creative thinking skills."),
+    ]
+
+    tasks = [
+        Task("Decipher the strange symbol on the wall...wait!..Niharika's bracelet has a similar symbol on it",
+             "The clue reveals that the imposter is very active on social media"),
+        Task("You found a piece of paper in Ananya's pocket saying something!...Solve the riddle.",
+             "Your instincts kick in as you observe others closely. You notice someone other than you is also being very careful about their surroundings... *guess* it's Aditya, Ananya, and Aarohi"),
+        Task("You find out Rohan and Ananya are hiding something...it's a key!!",
+             "The clue hints that the imposter uses the right side of the brain more often"),
+        Task("Reconstruct the torn diary pages found.",
+             "With Rohan's assistance, you identify a clue from the diary pages. The imposter is a two-faced person... ALL THAT GLITTERS IS NOT GOLD!!!"),
+        Task("Aditya mysteriously finds a wireless code breaker lying around in the room...",
+             "The code is broken!! The imposter's name starts with the letter 'A'"),
+    ]
+
+    # Game start
+    print("Welcome to the Room of Lies!")
+    reveal_backstories(characters)
+    imposter = select_imposter(characters)
+
+    if imposter is None:
+        print("Game over!")
+        return
+
+    player_character = choose_character(characters)
+
+    if player_character is None:
+        return
+
+    print("\nThe game begins now!")
+
+    for task in tasks:
+        perform_task(task, imposter)
+
+    print("\nCongratulations! You have completed all the tasks.")
+
+    time.sleep(3)
+
+    # Ask the user to guess the imposter
+    guess = input("Guess the imposter's name: ")
+
+    # Check if the guess is correct
+    if guess.lower() == "ananya":
+        print("Congratulations! You correctly identified the imposter as Ananya!")
+    else:
+        print("You failed to guess the imposter.")
+
+
+play_game()
+
