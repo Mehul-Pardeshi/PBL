@@ -29,3 +29,4 @@ password = generate_password(length, include_letters, include_digits, include_sy
 # Print the generated password
 if password:
     print("Generated password:", password)
+    print("Mehul")
